@@ -15,8 +15,13 @@ class CleaningScheduleController extends Controller
 {
     public function index()
     {
-        $schedules = CleaningSchedule::with('user1','user2')->get();
+        $schedules = CleaningSchedule::with('user1','user2')->where('monitoringDate','>=',Carbon::today())->get();
         return view('users',['schedules'=> $schedules]);
+    }
+
+    public function scheduleHistory(){
+        $schedules = CleaningSchedule::with('user1','user2')->where('monitoringDate','<',Carbon::today())->get();
+        return view('schedule_history',['schedules'=> $schedules]);
     }
 
     public function populateData(): \Illuminate\Http\RedirectResponse
