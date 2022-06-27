@@ -8,6 +8,7 @@ use App\Mail\EmployeeReminder;
 use App\Models\CleaningSchedule;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,6 +18,14 @@ class CleaningScheduleController extends Controller
     {
         $schedules = CleaningSchedule::with('user1','user2')->get();
         return view('users',['schedules'=> $schedules]);
+    }
+
+    public function userSchedule() {
+        $schedules = CleaningSchedule::with('user1','user2')
+                                        ->where('user1_id','=',Auth::user()->id)
+                                        ->orWhere('user2_id','=',Auth::user()->id)
+                                        ->get();
+        return view('single_user_schedule',['schedules' => $schedules]);
     }
 
     public function populateData(): \Illuminate\Http\RedirectResponse

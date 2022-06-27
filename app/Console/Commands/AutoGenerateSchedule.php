@@ -48,7 +48,7 @@ class AutoGenerateSchedule extends Command
             ]);
             $date->addDay(1);
         }
-        dispatch(new NotifyAllUsersJob());
+//        dispatch(new NotifyAllUsersJob());
         return 0;
     }
 }
