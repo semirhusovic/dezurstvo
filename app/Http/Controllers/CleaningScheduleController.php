@@ -15,7 +15,7 @@ class CleaningScheduleController extends Controller
 {
     public function index()
     {
-        $schedules = CleaningSchedule::with('user1','user2')->get();
+        $schedules = CleaningSchedule::with('user1','user2')->paginate(CleaningSchedule::ITEMS_PER_PAGE);
         return view('users',['schedules'=> $schedules]);
     }
 

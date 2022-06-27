@@ -28,6 +28,6 @@ class NotifyAllMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Raspored dezurstva')->view('mails.schedule_table')
+        return $this->subject('Raspored dezurstva')->view('mails.schedule_table');
     }
 }
