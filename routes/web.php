@@ -24,3 +24,4 @@ Route::get('/home',[App\Http\Controllers\CleaningScheduleController::class,'inde
 //Route::get('/kreiraj',[App\Http\Controllers\CleaningScheduleController::class,'populateData'])->name('kreiraj');
 Route::get('schedule/export/', [App\Http\Controllers\CleaningScheduleController::class, 'export'])->name('schedule-report');
 
+Route::resource('/users',App\Http\Controllers\UserController::class);
