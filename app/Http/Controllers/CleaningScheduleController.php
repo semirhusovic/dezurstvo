@@ -8,6 +8,7 @@ use App\Mail\EmployeeReminder;
 use App\Models\CleaningSchedule;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -36,6 +37,18 @@ class CleaningScheduleController extends Controller
             $date->addDay(1);
         }
         return redirect()->route('raspored');
+    }
+
+    public function updateTask(Request $request) {
+        $schedule = CleaningSchedule::query()->findOrFail($request->schedule_id);
+
+        if($request->isTrash !== null) {
+            $schedule->updateOrFail(['isTrash' => $request->isTrash]);
+        }
+        if($request->isDishes !== null) {
+            $schedule->updateOrFail(['isDishes' => $request->isDishes]);
+        }
+        return $schedule;
     }
 
     public function export(): \Symfony\Component\HttpFoundation\BinaryFileResponse

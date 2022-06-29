@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CleaningSchedule extends Model
 {
     use HasFactory;
-    protected $fillable = ['monitoringDate','user1_id','user2_id'];
+    protected $fillable = ['monitoringDate','user1_id','user2_id','isTrash','isDishes'];
     protected $hidden = ['created_at', 'updated_at'];
 
     public function user1(): \Illuminate\Database\Eloquent\Relations\BelongsTo
