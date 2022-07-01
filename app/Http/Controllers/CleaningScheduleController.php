@@ -41,13 +41,7 @@ class CleaningScheduleController extends Controller
 
     public function updateTask(Request $request) {
         $schedule = CleaningSchedule::query()->findOrFail($request->schedule_id);
-
-        if($request->isTrash !== null) {
-            $schedule->updateOrFail(['isTrash' => $request->isTrash]);
-        }
-        if($request->isDishes !== null) {
-            $schedule->updateOrFail(['isDishes' => $request->isDishes]);
-        }
+        $schedule->updateOrFail($request->except('schedule_id'));
         return $schedule;
     }
 
