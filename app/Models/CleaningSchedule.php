@@ -10,6 +10,7 @@ class CleaningSchedule extends Model
     use HasFactory;
     protected $fillable = ['monitoringDate','user1_id','user2_id'];
     protected $hidden = ['created_at', 'updated_at'];
+    const ITEMS_PER_PAGE = 5;
 
     public function user1(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
