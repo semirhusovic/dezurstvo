@@ -8,6 +8,7 @@ use App\Mail\EmployeeReminder;
 use App\Models\CleaningSchedule;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
@@ -33,7 +34,6 @@ class CleaningScheduleController extends Controller
         return view('schedule_history',['schedules'=> $schedules]);
     }
 
-
     public function populateData(): \Illuminate\Http\RedirectResponse
     {
         $allUsers = User::query()->all()->shuffle()->toArray(); // List of all users in random order
@@ -51,6 +51,12 @@ class CleaningScheduleController extends Controller
             $date->addDay(1);
         }
         return redirect()->route('raspored');
+    }
+
+    public function updateTask(Request $request) {
+        $schedule = CleaningSchedule::query()->findOrFail($request->schedule_id);
+        $schedule->updateOrFail($request->except('schedule_id'));
+        return $schedule;
     }
 
     public function export(): \Symfony\Component\HttpFoundation\BinaryFileResponse

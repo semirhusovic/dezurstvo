@@ -14,16 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[\App\Http\Controllers\Auth\LoginController::class,'login']);
+Route::get('/',[\App\Http\Controllers\Auth\LoginController::class,'login'])->middleware('auth');
 
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home',[App\Http\Controllers\CleaningScheduleController::class,'index'])->name('raspored');
-Route::get('/my-schedule',[App\Http\Controllers\CleaningScheduleController::class,'userSchedule'])->name('my-schedule');
+Route::get('/home',[App\Http\Controllers\CleaningScheduleController::class,'index'])->name('raspored')->middleware('auth');
 //Route::get('/kreiraj',[App\Http\Controllers\CleaningScheduleController::class,'populateData'])->name('kreiraj');
-Route::get('/history',[App\Http\Controllers\CleaningScheduleController::class,'scheduleHistory'])->name('history');
-Route::get('schedule/export/', [App\Http\Controllers\CleaningScheduleController::class, 'export'])->name('schedule-report');
+Route::get('schedule/export/', [App\Http\Controllers\CleaningScheduleController::class, 'export'])->name('schedule-report')->middleware('auth');
+Route::get('/my-schedule',[App\Http\Controllers\CleaningScheduleController::class,'userSchedule'])->name('my-schedule')->middleware('auth');
+Route::get('/history',[App\Http\Controllers\CleaningScheduleController::class,'scheduleHistory'])->name('history')->middleware('auth');
+Route::resource('/users',App\Http\Controllers\UserController::class)->middleware('auth');
+Route::post('update-task',[App\Http\Controllers\CleaningScheduleController::class, 'updateTask']);
 
-Route::resource('/users',App\Http\Controllers\UserController::class);
+
