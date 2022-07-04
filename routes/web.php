@@ -26,3 +26,4 @@ Route::get('/my-schedule',[App\Http\Controllers\CleaningScheduleController::clas
 Route::get('/history',[App\Http\Controllers\CleaningScheduleController::class,'scheduleHistory'])->name('history');
 Route::get('schedule/export/', [App\Http\Controllers\CleaningScheduleController::class, 'export'])->name('schedule-report');
 
+Route::resource('/users',App\Http\Controllers\UserController::class);
