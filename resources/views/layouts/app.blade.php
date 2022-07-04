@@ -39,6 +39,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('my-schedule') }}">{{'My schedule'}}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('history') }}">{{'Schedule history'}}</a>
+                            </li>
                         @endguest
                     </ul>
 

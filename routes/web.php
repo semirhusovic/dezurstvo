@@ -23,5 +23,6 @@ Auth::routes();
 Route::get('/home',[App\Http\Controllers\CleaningScheduleController::class,'index'])->name('raspored');
 Route::get('/my-schedule',[App\Http\Controllers\CleaningScheduleController::class,'userSchedule'])->name('my-schedule');
 //Route::get('/kreiraj',[App\Http\Controllers\CleaningScheduleController::class,'populateData'])->name('kreiraj');
+Route::get('/history',[App\Http\Controllers\CleaningScheduleController::class,'scheduleHistory'])->name('history');
 Route::get('schedule/export/', [App\Http\Controllers\CleaningScheduleController::class, 'export'])->name('schedule-report');
 
